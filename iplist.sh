@@ -2,7 +2,7 @@
 clear
 rm tmpproxy.list 2> /dev/null
 printf "Getting Proxy.."
-proxy=$(curl "https://free-proxy-list.net/" -s | grep -Po '(?<=<tr><td>)[^<]*|(?<=</td><td>)[^<]*' | sed 's/[^0-9.]*//g' | sed '/^\s*$/d' | awk 'ORS=NR%2?FS:RS' | tr " " ":" >> tmpproxy.list)
+proxy=$(curl "https://www.sslproxies.org/" -s | grep -Po '(?<=<tr><td>)[^<]*|(?<=</td><td>)[^<]*' | sed 's/[^0-9.]*//g' | sed '/^\s*$/d' | awk 'ORS=NR%2?FS:RS' | tr " " ":" >> tmpproxy.list)
 if [[ -f "tmpproxy.list" ]] ; then
 printf "Done\n"
 printf "Getting Live Proxy..\n"
