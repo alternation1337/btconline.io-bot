@@ -1,9 +1,9 @@
 #!/bin/bash
 clear
-rm ipproxy.list 2> /dev/null
+rm tmpproxy.list 2> /dev/null
 printf "Getting Proxy.."
-proxy=$(curl "https://free-proxy-list.net/" -s | grep -Po '(?<=<tr><td>)[^<]*|(?<=</td><td>)[^<]*' | sed 's/[^0-9.]*//g' | sed '/^\s*$/d' | awk 'ORS=NR%2?FS:RS' | tr " " ":" >> ipproxy.list)
-if [[ -f "ipproxy.list" ]] ; then
+proxy=$(curl "https://free-proxy-list.net/" -s | grep -Po '(?<=<tr><td>)[^<]*|(?<=</td><td>)[^<]*' | sed 's/[^0-9.]*//g' | sed '/^\s*$/d' | awk 'ORS=NR%2?FS:RS' | tr " " ":" >> tmpproxy.list)
+if [[ -f "tmpproxy.list" ]] ; then
 printf "Done\n"
 printf "Getting Live Proxy..\n"
 else
@@ -18,7 +18,7 @@ getcountry=$(curl -s "http://www.proxy-checker.org/checkproxy.php?proxy=$proxys&
     if [[ $getlive == "working" ]]
         then 
             printf "$proxys : Live [$getcountry]\n"
-            printf "$proxys\n" >> iplist.txt
+            printf "$proxys\n" >> proxylist.txt
         else 
             printf "$proxys : Die\n"
     fi
@@ -26,7 +26,7 @@ getcountry=$(curl -s "http://www.proxy-checker.org/checkproxy.php?proxy=$proxys&
 sleptime=0.2
 coun=1
 thread=1
-for proxys in $(cat ipproxy.list)
+for proxys in $(cat tmpproxy.list)
 do
 formula=$(expr $coun % $thread)
 	if [[ $formula == 0 && $coun > 0 ]]; then
