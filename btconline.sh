@@ -9,10 +9,10 @@ signup=$(curl -s -X POST -d "wallet_address=$address&pin=$pin&action=post&refid=
     if [[ $signup == "" ]]
         then
    printf "[Address: $address] [Proxy: $proxys]"
-            printf " [Status: Success]\n"
+            printf " [Status: Mantap Lur :D]\n"
          else
 printf "[Address: $address] [Proxy: $proxys]"
-            printf " [Status: gagal]\n"
+            printf " [Status: Gagal Lur :(]\n"
             fi
 }
 for proxys in $(cat proxylist.txt)
