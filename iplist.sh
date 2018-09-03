@@ -18,7 +18,7 @@ getcountry=$(curl -s "http://www.proxy-checker.org/checkproxy.php?proxy=$proxys&
     if [[ $getlive == "working" ]]
         then 
             printf "$proxys : Live [$getcountry]\n"
-            printf "$proxys\n" >> proxylist.txt
+            printf "$proxys\n" >> iplist.txt
         else 
             printf "$proxys : Die\n"
     fi
@@ -26,7 +26,7 @@ getcountry=$(curl -s "http://www.proxy-checker.org/checkproxy.php?proxy=$proxys&
 sleptime=0.2
 coun=1
 thread=1
-for proxys in $(cat tmpproxy.list)
+for proxys in $(cat ipproxy.list)
 do
 formula=$(expr $coun % $thread)
 	if [[ $formula == 0 && $coun > 0 ]]; then
